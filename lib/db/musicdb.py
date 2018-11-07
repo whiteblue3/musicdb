@@ -450,8 +450,8 @@ class MusicDatabase(Database):
     SUBGENRE_NAME       = 1
     SUBGENRE_MAINGENRE  = 2
 
-    def __init__(self, path):
-        Database.__init__(self, path)
+    def __init__(self, host, port, name, user, password, charset):
+        Database.__init__(self, host, port, name, user, password, charset)
         try:
             result = self.GetFromDatabase("SELECT value FROM meta WHERE key = 'version'")
             version = int(result[0][0])

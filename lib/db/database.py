@@ -17,31 +17,54 @@
 import sqlite3
 import logging
 import gzip
+import pymysql.cursors
 
 
 class Database(object):
     """
     This is the base class for all database classes in MusicDB.
-    It establishes the connection to the sqlite3 databases.
-
-    The connection timeout is set to ``20``.
+    It establishes the connection to the mariadb databases.
 
     Args:
-        path (str): absolute path to the database file.
+        host (str): host url of database.
+        port (int): database port.
+        name (str): database name of using.
+        user (str): database user id.
+        password (str): database user password.
+        charset (str): database character set.
 
     Raises:
         TypeError: When *path* is not a string
     """
 
-    def __init__(self, path):
-        # check path
-        if type(path) != str:
-            raise TypeError("A valid database path is necessary")
+    def __init__(self, host, port, name, user, password, charset):
+        # check params
+        if type(host) != str:
+            raise TypeError("A valid database host is necessary")
+
+        if type(port) != int:
+            raise TypeError("A valid database port is necessary")
+
+        if type(name) != str:
+            raise TypeError("A valid database name is necessary")
+
+        if type(user) != str:
+            raise TypeError("A valid database user is necessary")
+
+        if type(password) != str:
+            raise TypeError("A valid database password is necessary")
+
+        if type(charset) != str:
+            raise TypeError("A valid database charset is necessary")
 
         # connect to database
-        self.db_connection = sqlite3.connect(path, timeout=20)
+        cursorclass = pymysql.cursors.DictCursor
+
+        self.db_connection = pymysql.connect(host=host, user=user, password=password, db=name, port=port, charset=charset, cursorclass=cursorclass)
         self.db_cursor     = self.db_connection.cursor()
 
+    def __del__(self):
+        self.db_connection.close()
 
     def Compress(self, string):
         """
@@ -119,7 +142,7 @@ class Database(object):
 
         if values:
             if type(values) != tuple and type(values) != list and type(values) != dict:
-                values = [values]   # create a one element list because splite3:execute expects one
+                values = [values]   # create a one element list because mariadb:execute expects one
 
         try:
             if values:

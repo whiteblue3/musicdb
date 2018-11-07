@@ -69,8 +69,8 @@ class TrackerDatabase(Database):
         ValueError: When the version of the database does not match the expected version. (Updating MusicDB may failed)
     """
 
-    def __init__(self, path):
-        Database.__init__(self, path)
+    def __init__(self, host, port, name, user, password, charset):
+        Database.__init__(self, host, port, name, user, password, charset)
         try:
             result = self.GetFromDatabase("SELECT value FROM meta WHERE key = 'version'")
             version = int(result[0][0])

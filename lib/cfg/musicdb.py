@@ -139,7 +139,12 @@ class MusicDBConfig(Config):
 
         # [database]
         self.database = DATABASE()
-        self.database.path          = self.GetFile( "database", "path",         "/opt/musicdb/data/music.db")
+        self.database.host          = self.GetFile( "database", "dbhost",         "localhost")
+        self.database.port          = self.GetFile( "database", "dbport",         3307)
+        self.database.name          = self.GetFile( "database", "dbname",         "musicdb")
+        self.database.user          = self.GetFile( "database", "dbuser",         "root")
+        self.database.password      = self.GetFile( "database", "dbpass",         "")
+        self.database.charset       = self.GetFile( "database", "charset",        "utf8")
 
 
         # [music]
@@ -190,12 +195,21 @@ class MusicDBConfig(Config):
 
         # [tracker]
         self.tracker = TRACKER()
-        self.tracker.dbpath         = self.GetFile( "tracker",  "dbpath",       "/opt/musicdb/data/tracker.db")
-
+        self.tracker.host = self.GetFile("tracker", "dbhost", "localhost")
+        self.tracker.port = self.GetFile("tracker", "dbport", 3307)
+        self.tracker.name = self.GetFile("tracker", "dbname", "tracker")
+        self.tracker.user = self.GetFile("tracker", "dbuser", "root")
+        self.tracker.password = self.GetFile("tracker", "dbpass", "")
+        self.tracker.charset = self.GetFile("tracker", "charset", "utf8")
 
         # [lycra]
         self.lycra = LYCRA()
-        self.lycra.dbpath           = self.GetFile( "lycra",    "dbpath",       "/opt/musicdb/data/lycra.db")
+        self.lycra.host = self.GetFile("lycra", "dbhost", "localhost")
+        self.lycra.port = self.GetFile("lycra", "dbport", 3307)
+        self.lycra.name = self.GetFile("lycra", "dbname", "lycra")
+        self.lycra.user = self.GetFile("lycra", "dbuser", "root")
+        self.lycra.password = self.GetFile("lycra", "dbpass", "")
+        self.lycra.charset = self.GetFile("lycra", "charset", "utf8")
 
 
         # [Icecast]

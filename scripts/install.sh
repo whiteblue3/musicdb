@@ -12,7 +12,7 @@ source ./install/mdbdirtree.sh
 source ./install/mdbusers.sh
 source ./install/ssl.sh
 source ./install/mdbconfig.sh
-source ./install/database.sh
+# source ./install/database.sh
 source ./install/icecast.sh
 source ./install/sysenv.sh
 source ./install/mdbfiles.sh

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# This script is not using
 
 function InstallMusicDBDatabases {
     local SOURCEDIR="$1"
